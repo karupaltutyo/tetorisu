@@ -117,5 +117,11 @@ void TitleScene_update(void)
 void TitleScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawString(100,100,)
+	DrawString(100, 100, "テトリス", GetColor(255, 255, 255));
+	DrawString(300, 300, "スタート", GetColor(255, 255, 255));
+	DrawString(300, 350, "ランキング", GetColor(255, 255, 255));
+	DrawString(300, 400, "エンド", GetColor(255, 255, 255));
+	SetFontSize(20);
+
+	DrawCircle(275, 325 + (cursor_number * 50), 15, GetColor(255, 0, 0));
 }
