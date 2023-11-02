@@ -7,7 +7,7 @@
 *マクロ定義
 *************************/
 #define RANKING_FILE     ("dat/renkingdata.csv")
-#define RANKING_MSX              (10)
+#define RANKING_MAX              (10)
 #define RANKING_NAME_LEN    (11)
 /**************************
 *型定義
@@ -108,10 +108,19 @@ void RankingScene_Draw(void)
 	defalut:
 		for (i = 0; i < RANKING_MAX; i++)
 		{
-			DrawFormatString(20, 10 + (i * 25), Getcolor(255, 255, 255), "%2d,%10s,%10d,"Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
+			DrawFormatString(20, 10 + (i * 25), GetColor(255, 255, 255), "%2d,%10s,%10d",Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
 		}
 		break;
 	}
+}
+/**************************
+*ランキング画面：画面変更処理
+* 引数：なし
+* 戻り値：なし
+**************************/
+void Set_RankingMode(int mode)
+{
+	DispMode = mode;
 }
 
 /**********************************
@@ -172,7 +181,7 @@ void file_write(void)
 	}
 	else
 	{
-		for (i = 0; i < RANKNG_MAX; i++)
+		for (i = 0; i < RANKING_MAX; i++)
 		{
 			fprintf(fp, "%2d,%[^,],%10d\n", Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
 		}
@@ -198,15 +207,17 @@ void ranking_sort(void)
 	{
 		for (j = i + 1; j < RANKING_MAX; j++)
 		{
+			if(Ranking_Data[i].score<Ranking_Data[j].score)
+			{
 			tmp = Ranking_Data[i];
 			Ranking_Data[i] = Ranking_Data[j];
 			Ranking_Data[j] = tmp;
-		}
+	     }
 	}
 }
 
 //順位を上から降っていく
-for (i = 0; iRANKING_MAX; i++)
+for (i = 0;i<RANKING_MAX; i++)
 {
 	Ranking_Data[i].rank = i + 1;
 }
@@ -258,12 +269,12 @@ void ranking_input_name(void)
 		if (Cursor.y < 2)
 		{
 			c = 'a' + Cursor.x + (Cursor.y * 13);
-			ew_Score.name[name_num++] = c;
+			New_Score.name[name_num++] = c;
 		}
 		else if (Cursor.y < 4)
 		{
 			c = 'A' + Cursor.x + ((Cursor.y - 2) * 13);
-			New_Score.name[name_name++] = c;
+			New_Score.name[name_num++] = c;
 		}
 		else
 		{
@@ -279,8 +290,8 @@ void ranking_input_name(void)
 			}
 			else
 			{
-				DispMode = RANKING_DISPMODE;
-				ranking_sprt();
+				DispMode = RANKING_DISP_MODE;
+				ranking_sort();
 			}
 		}
 
@@ -304,7 +315,7 @@ void ranking_input_name_draw(void)
 	for (i = 0; i < 26; i++)
 	{
 		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 330, GetColor(255, 255, 255), "%-3c", 'a' + 1);
-		DrawFormatString((i%13 * 50) + 300, (i / 13 * 50) + 430, GetColor(255, 255, 255)."%-3c", 'A' + 1);
+		DrawFormatString((i%13 * 50) + 300, (i / 13 * 50) + 430, GetColor(255, 255, 255),"%-3c", 'A' + 1);
 	}
 	for (i = 0; i < 10; i++)
 	{

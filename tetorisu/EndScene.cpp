@@ -1,4 +1,4 @@
-#includ "EndScene.h"
+#include "EndScene.h"
 #include "DxLib.h"
 /*************************
 *ƒ}ƒNƒ’è‹`

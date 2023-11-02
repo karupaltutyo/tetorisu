@@ -4,7 +4,7 @@
 /***********************
 *マクロ定義
 ***********************/
-#define XINPUT_BUTTON_MAX　(　16　)         //コントロールのボタン数
+#define XINPUT_BUTTON_MAX (16)         //コントロールのボタン数
 
 /************************
 *型定義
@@ -37,15 +37,9 @@ void InputControl_Initialize(void)
 	int i;            //ループカウンタ
 
 	//入力状態の初期化
-	for (i = 0; i < XINPUT_BUTTON_MAX; i + )
+	for (i = 0; i < XINPUT_BUTTON_MAX; i++ )
 	{
-		int i;           //ループカウンタ
-
-		//入力状態の初期化
-		for (i = 0; i < XINPUT_BUTTON_MAX; i++)
-		{
-			button_state[i] = E_NONE;
-		}
+		button_state[i] = E_NONE;
 	}
 }
 
@@ -54,13 +48,13 @@ void InputControl_Initialize(void)
 * 引数：なし
 * 戻り値：なし
 ***********************/
-void InputContorol_Update(void)
+void InputControl_Update(void)
 {
 	int i;                               //ループカウンター
-	XINPUT_STATE inpt_controller;       //コントローラー入力情報
+	XINPUT_STATE input_controller;       //コントローラー入力情報
 
 	//コントロールの入力情報を取得
-	GetJoypadxInputState(DX_INPUT_PAD1, &input_controller);
+	GetJoypadXInputState(DX_INPUT_PAD1, &input_controller);
 
 	//	入力状態の更新
 	for (i = 0; i < XINPUT_BUTTON_MAX; i++)

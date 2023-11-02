@@ -12,7 +12,7 @@
 enum GAME_MODE
 {
 	E_TITLE,
-	E_GAMEMAIM,
+	E_GAMEMAIN,
 	E_RANKING,
 	E_END,
 	E_MODE_MAX
@@ -22,7 +22,7 @@ enum GAME_MODE
 *プロトタイプ宣言
 ************************/
 void SceneManager_Initialize(GAME_MODE mode);     //初期化処理
-void SceneeManager_Update(void);                  //更新処理
+void SceneManager_Update(void);                  //更新処理
 void SceneManager_Draw(void);                     //描画処理
 
 void Change_Scene(GAME_MODE mode);                //シーン変更処理

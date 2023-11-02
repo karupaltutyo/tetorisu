@@ -15,7 +15,7 @@
 *グローバル変数宣言
 ***************************/
 int BackGround_image;         //背景画像イメージ
-int BackGround_soud;          //BGM
+int BackGround_sound;          //BGM
 int GameOver_sound;                //ゲームオーバーSE
 int Score;                         //スコア
 
@@ -28,13 +28,13 @@ int Score;                         //スコア
 * 引数：なし
 * 戻り値：エラー情報
 ***************************/
-int GameMainScene_Initislize(void)
+int GameMainScene_Initialize(void)
 {
 	int ret = 0;
 
 	ret = Block_Initialize();
 	BackGround_image = LoadGraph("images/stage.png");
-	BackGround_soound = LoadSoundMem("sounds/BGM017.ogg");
+	BackGround_sound = LoadSoundMem("sounds/BGM017.ogg");
 	GameOver_sound = LoadSoundMem("sounds/GameOver.mp3");
 
 	//エラーチェック
@@ -67,7 +67,7 @@ void GameMainScene_Update(void)
 	//生成できなくなったら
 	if (Get_GenerateFlg() != TRUE)
 	{
-		playSoudMem(GameOver_sound, DX_PLAYTYPE_BACK, FALSE);
+		PlaySoundMem(GameOver_sound, DX_PLAYTYPE_BACK, FALSE);
 		Change_Scene(E_RANKING);
 		StopSoundMem(BackGround_sound);
 	}

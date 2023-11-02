@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "GameMainScene.h"
+#include "RankingScene.h"
 #include "EndScene.h"
 #include "DxLib.h"
 
@@ -28,7 +29,7 @@ int read_error;               //読み込みエラー確認
 * 引数：ゲームモード情報
 * 戻り値：なし
 ***********************/
-void SceneManager_Initialize(GEME_MODE mode)
+void SceneManager_Initialize(GAME_MODE mode)
 {
 	read_error = D_NORMALITY;
 	switch (mode)
@@ -53,7 +54,7 @@ void SceneManager_Initialize(GEME_MODE mode)
 		break;
 	case E_END:
 	dafault:
-		EndScene_nitialize();                         //エンド画面の初期化
+		EndScene_Initialize();                         //エンド画面の初期化
 		break;
 	}
 	game_mode = mode;
@@ -79,7 +80,7 @@ void SceneManager_Update(void)
 		TitleScene_Update();
 		break;
 	case E_GAMEMAIN:
-		GameainScene_Update();
+		GameMainScene_Update();
 		break;
 	case E_RANKING:
 		RankingScene_Update();
@@ -96,7 +97,7 @@ void SceneManager_Update(void)
 * 引数：なし
 * 戻り値：なし
 *************************/
-void SceneManger_Draw(void)
+void SceneManager_Draw(void)
 {
 	//各画面の描画処理
 	switch (game_mode)
@@ -134,5 +135,5 @@ int ErrorCheck(void)
 	{
 		read_error = D_ERROR;
 	}
-	return resa_error;
+	return read_error;
 }

@@ -1,5 +1,5 @@
 #include "TitleScene.h"
-#include "InputControi.h"
+#include "InputControl.h"
 #include "SceneManager.h"
 #include "DxLib.h"
 
@@ -18,6 +18,12 @@ enum
 	E_SOUND_MAX
 };
 
+/*************************
+*グローバル変数宣言
+*************************/
+int cursor_number;
+int sounds[E_SOUND_MAX];
+
 /**************************
 *プロトタイプ宣言
 **************************/
@@ -27,18 +33,18 @@ enum
 * 引数：なし
 * 戻り値：エラー情報(-1：異常有、-1以外：正常終了)
 **************************/
-int TitleScene_Initialeze(void)
+int TitleScene_Initialize(void)
 {
 	int ret = 0;
 
 	cursor_number = 0;
 
 	sounds[E_TITLE_BGM] = LoadSoundMem("sounds/BGM041.ogg");
-	sounds[E_TITLE_SE_CURSOR] = LoadSoundem("sounds/SE1.mp3");
+	sounds[E_TITLE_SE_CURSOR] = LoadSoundMem("sounds/SE1.mp3");
 	sounds[E_TITLE_SE_SELECT] = LoadSoundMem("sounds/SE2.mp3");
 
-	ChangeVo1umeSoundMem(120, sounds[E_TITLE_SE_CURSOR]);
-	ChangeVoiumeSoundMem(80, sounds[E_TITLE_SE_SELECT]);
+	ChangeVolumeSoundMem(120, sounds[E_TITLE_SE_CURSOR]);
+	ChangeVolumeSoundMem(80, sounds[E_TITLE_SE_SELECT]);
 
 	for (int i = 0; i < E_SOUND_MAX; i++)
 	{
@@ -56,28 +62,28 @@ int TitleScene_Initialeze(void)
 * 引数：なし
 * 戻り値：なし
 ************************/
-void TitleScene_update(void)
+void TitleScene_Update(void)
 {
 	// BGMが流れてない時に再生
-	if (checkSoundMem(sounds[E_TITLE_BGM] != TRUE)
+	if (CheckSoundMem(sounds[E_TITLE_BGM]) != TRUE)
 	{
-		PlaySoundMem(sounds[E_TITLE_BGM],DX＿PLAYTYPE_BACK,FALSE);
+		PlaySoundMem(sounds[E_TITLE_BGM],DX_PLAYTYPE_BACK,FALSE);
 	}
 
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		StopSoundMem(sounds{ E_TITLE_BGM });
-			PlaySoundMem(sounds{E_TITLE_SE_SELECT},DX_PLAYPE_BACK,FALSE);
+		    StopSoundMem(sounds[ E_TITLE_BGM ]);
+			PlaySoundMem(sounds[E_TITLE_SE_SELECT],DX_PLAYTYPE_BACK,FALSE);
 			switch (cursor_number)
 			{
-				case 0;
+			case 0:
 					Change_Scene(E_GAMEMAIN);
 					break;
-				case 1;
+			case 1:
 					Change_Scene(E_RANKING);
 					break;
-				case 2;
-					default;
+			case 2:
+			default:
 					Change_Scene(E_END);
 					break;
 			}
@@ -86,7 +92,7 @@ void TitleScene_update(void)
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-		if (CURSOR_number <= 0)
+		if (cursor_number <= 0)
 		{
 			cursor_number = 0;
 		}
@@ -95,7 +101,7 @@ void TitleScene_update(void)
 			cursor_number--;
 		}
 	}
-	if (GetButtonUp(XINPUT_BUTTON_DOWN) == TRUE)
+	if (GetButtonUp(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
 		if (cursor_number >= 2)

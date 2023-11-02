@@ -1,4 +1,4 @@
-#include "FreamControl.h"
+#include "FramControl.h"
 #include "DxLib.h"
 /*****************************
 *マクロ定義
@@ -15,7 +15,7 @@
 /*****************************
 *変数定義
 *****************************/
-int Freamime;
+int FreamTime;
 int NowTime;
 int Wait;
 int LastTime;
@@ -42,7 +42,8 @@ void FreamControl_Initialize(void)
 * 引数：なし
 * 戻り値：なし
 ******************************/
-void FreamControl_Updeta(void)
+
+void FreamControl_Update(void)
 {
 	NowTime = GetNowCount();
 	Wait = FreamTime - (NowTime - LastTime);
