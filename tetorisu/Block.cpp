@@ -176,6 +176,9 @@ int Block_Initialize(void)
 *******************************/
 void Block_Update(void)
 {
+	//ブロックの移動処理
+	move_block();
+
 	//ブロックのストック
 	if ((GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE) || (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE))
 	{
@@ -242,7 +245,7 @@ void Block_Draw(void)
 	//次のブロックとストックされたブロックを描画
 	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 	{
-		for (j = 0; j < FIELD_WIDTH; j++)
+		for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 		{
 			if (Field[i][j] != E_BLOCK_WALL)
 			{
