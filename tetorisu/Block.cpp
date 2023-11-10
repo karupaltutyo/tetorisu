@@ -234,7 +234,7 @@ void Block_Draw(void)
 	//フィールドのブロックを描画
 	for (i = 0; i < FIELD_HEIGHT; i++)
 	{
-		for (j = 0; j < FIELD_HEIGHT; j++)
+		for (j = 0; j < FIELD_WIDTH; j++)
 		{
 			if (Field[i][j] != E_BLOCK_WALL)
 			{
@@ -242,17 +242,7 @@ void Block_Draw(void)
 			}
 		}
 	}
-	//次のブロックとストックされたブロックを描画
-	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
-	{
-		for (j = 0; j < BLOCK_TROUT_SIZE; j++)
-		{
-			if (Field[i][j] != E_BLOCK_WALL)
-			{
-				DrawGraph(j * BLOCK_TROUT_SIZE, i * BLOCK_SIZE, BlockImage[Field[i][j]], TRUE);
-			}
-		}
-	}
+
 	//次のブロックとストックされたブロックを描画
 	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 	{
@@ -495,7 +485,7 @@ void turn_block(int clockwise)
 		}
 
 	} while (check_overlap(DropBlock_X, DropBlock_Y) == FALSE);
-	PlaySoundMem(SoundEffect[2], DX_PLAYTYPE_BACK, true);
+	PlaySoundMem(SoundEffect[2], DX_PLAYTYPE_BACK, TRUE);
 }
 
 /**************************

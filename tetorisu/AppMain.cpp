@@ -87,6 +87,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//DXライブラリ使用の終了処理
 	DxLib_End();
 
-	//ソフトの終了
+	// フトの終了
 	return 0;
 }
