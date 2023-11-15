@@ -1,7 +1,7 @@
 #include "RankingScene.h"
 #include "DxLib.h"
 #include "InputControl.h"
-#include "SceneManager.h"
+#include "SceneManager.h"5
 
 /*************************
 *マクロ定義
@@ -156,7 +156,7 @@ void file_read(void)
 	{
 		for (i = 0; i < RANKING_MAX; i++)
 		{
-			fscanf_s(fp, "2d,%[^,],%10d\n", &Ranking_Data[i].rank, Ranking_Data[i].name, RANKING_NAME_LEN, &Ranking_Data[i].score);
+			fscanf_s(fp, "%2d,%[^,],%10d\n", &Ranking_Data[i].rank, Ranking_Data[i].name, RANKING_NAME_LEN, &Ranking_Data[i].score);
 		}
 		fclose(fp);
 	}
@@ -183,7 +183,7 @@ void file_write(void)
 	{
 		for (i = 0; i < RANKING_MAX; i++)
 		{
-			fprintf(fp, "%2d,%[^,],%10d\n", Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
+			fprintf(fp, "%2d,%s,%10d\n", Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
 		}
 		fclose(fp);
 	}
@@ -251,7 +251,7 @@ void ranking_input_name(void)
 	}
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
 	{
-		if (Cursor.y < 0)
+		if (Cursor.y > 0)
 		{
 			Cursor.y--;
 		}
@@ -314,8 +314,8 @@ void ranking_input_name_draw(void)
 	//選択用文字を描画
 	for (i = 0; i < 26; i++)
 	{
-		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 330, GetColor(255, 255, 255), "%-3c", 'a' + 1);
-		DrawFormatString((i%13 * 50) + 300, (i / 13 * 50) + 430, GetColor(255, 255, 255),"%-3c", 'A' + 1);
+		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 330, GetColor(255, 255, 255), "%-3c", 'a' + i);
+		DrawFormatString((i%13 * 50) + 300, (i / 13 * 50) + 430, GetColor(255, 255, 255),"%-3c", 'A' + i);
 	}
 	for (i = 0; i < 10; i++)
 	{
