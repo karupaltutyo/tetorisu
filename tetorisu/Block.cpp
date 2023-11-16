@@ -420,7 +420,7 @@ void change_block(void)
 		Stock_Flg = TRUE;
 		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 		{
-			for (j = 0; j < BLOCK_TROUT_SIZE; i++)
+			for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 			{
 				Stock[i][j] = DropBlock[i][j];
 			}
@@ -479,7 +479,7 @@ void turn_block(int clockwise)
 		{
 			DropBlock_X--;
 		}
-		if (check_overlap(DropBlock_X, DropBlock_Y) && DropBlock_X<=E_BLOCK_WALL)
+		if (check_overlap(DropBlock_X, DropBlock_Y) && DropBlock_X<=E_BLOCK_EMPTY)
 		{
 			DropBlock_X++;
 		}
